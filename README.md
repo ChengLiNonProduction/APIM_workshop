@@ -74,8 +74,8 @@ cd script
 ```
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 ```  
-3. 重新运行 deploy.ps1 脚本，应该就可以正常执行了。
-4. 完成操作后，为安全性考虑，将执行策略更改回默认值，即禁止运行任何 PowerShell 脚本。
+2. 重新运行 deploy.ps1 脚本，应该就可以正常执行了。
+3. 完成操作后，为安全性考虑，将执行策略更改回默认值，即禁止运行任何 PowerShell 脚本。
 ```
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Restricted
 ``` 
