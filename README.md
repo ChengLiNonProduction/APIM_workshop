@@ -1,4 +1,3 @@
-
 # 利用 APIM 管理多个 Azure OpenAI 资源的endpoint/key
 
 当您拿到Azure OpenAI的订阅时，创建完服务，可以使用这个项目来部署第一个应用，分享给同事或朋友一起探索。<br/>
@@ -30,16 +29,16 @@ $RESOURCE_GROUP_NAME="TestGroupAPIM"
 $LOCATION="eastasia"
 
 # for DB
-$SQL_SERVER_NAME="SQLServer$(Get-Date -Format 'MMddHHmmss')"  # 需全球唯一
+$SQL_SERVER_NAME="<UniqueSQLServerName>"                      # 需全球唯一
 $ADMIN_USERNAME="SQLAdmin"
 $ADMIN_PASSWORD=Read-Host "Enter the admin password"          # 命令行中输入，密码不能太简单
 $DB_NAME="dbGPT"
 
 #for APIM
-$SVC_NAME="APIM$(Get-Date -Format 'MMddHHmmss')"              # 需全球唯一
+$SVC_NAME="<UniqueAPIMName>"                                  # 需全球唯一
 $API_ID="azuregpt-api"
-$AOAI_DEPLOYMENT_ID="<your deployment id>"
-$AOAI_MODEL_ID="<your model id>"
+$AOAI_DEPLOYMENT_ID="<your OpenAI resource name>"
+$AOAI_MODEL_ID="<your deployment id>"
 $AOAI_KEY=$AOAI_KEY = Read-Host "Enter the Azure OpenAI key"
 
 # 服务创建完成会发邮件通知
@@ -95,12 +94,11 @@ az account show
 az account set --subscription "Subscription Name"
 ```
 
-
 ### 部署多个Azure OpenAI的Endpoint/key
-- 在Azure APIM 创建多个backend：**URL格式必须一样。** 并设定api-key的header. 可以为手动指定，或命名值。
+- 在Azure APIM 创建多个backend：**URL格式必须一样。** 并设定api-key的header, key设定为OpenAI key.
 ```bash
 # 替换为相应backend的值 
-https://<depoyment_id>.openai.azure.com/openai/deployments/<model_id>  
+https://<your OpenAI resource name>.openai.azure.com/openai/deployments/<your deployment id>  
 ```
 ![lb_pol1](./images/lb_policy_0.png)
 - 打开API Post 接口的Policy:
