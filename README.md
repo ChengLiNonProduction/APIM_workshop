@@ -1,6 +1,6 @@
 # 利用 APIM 管理多个 Azure OpenAI 资源的endpoint/key
 
-当您拿到Azure OpenAI的订阅时，创建完服务，可以使用这个项目来部署第一个应用，分享给同事或朋友一起探索。<br/>
+当您拿到Azure OpenAI的订阅时，可以使用这个项目来部署第一个应用，分享给同事或朋友一起探索。<br/>
 
 - 前端使用 Vue 3 + TypeScript + Vite 实现。移动设备显示可自适应。
 - 后端使用 express JS API 来调用 Azure API 管理平台，再到 Azure OpenAI 的endpoint。AOAI的key不会提供给前端。
@@ -25,21 +25,21 @@
 - 打开[./script/deploy.ps1](./script/deploy.ps1), 按提示修改如下变量:
 
 ```bash
-$RESOURCE_GROUP_NAME="TestGroupAPIM"
+$RESOURCE_GROUP_NAME="TestGroupWebApp"
 $LOCATION="eastasia"
 
 # for DB
-$SQL_SERVER_NAME="<UniqueSQLServerName>"                      # 需全球唯一
+$SQL_SERVER_NAME="<Your Unique SQLServer Name>"                 # 需全球唯一
 $ADMIN_USERNAME="SQLAdmin"
-$ADMIN_PASSWORD=Read-Host "Enter the admin password"          # 命令行中输入，密码不能太简单
+$ADMIN_PASSWORD=Read-Host "Enter the admin password"            # 设置一个密码，不能太简单
 $DB_NAME="dbGPT"
 
 #for APIM
-$SVC_NAME="<UniqueAPIMName>"                                  # 需全球唯一
+$SVC_NAME="<Your Unique APIM Name>"                             # 需全球唯一
 $API_ID="azuregpt-api"
-$AOAI_DEPLOYMENT_ID="<your OpenAI resource name>"
-$AOAI_MODEL_ID="<your deployment id>"
-$AOAI_KEY=$AOAI_KEY = Read-Host "Enter the Azure OpenAI key"
+$AOAI_DEPLOYMENT_ID="<your OpenAI resource name>"               # 填入AOAI服务名称
+$AOAI_MODEL_ID="<your deployment id>"                           # 可在Azure AI Studio中查看
+$AOAI_KEY = Read-Host "Enter the Azure OpenAI key"
 
 # 服务创建完成会发邮件通知
 $APIM_PUBLISHER_EMAIL="<your email>"
