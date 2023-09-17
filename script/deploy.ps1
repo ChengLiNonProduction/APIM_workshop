@@ -1,34 +1,28 @@
-
-
-
-$RESOURCE_GROUP_NAME="rgOpenAIChat3"
+$RESOURCE_GROUP_NAME="rgOpenAIChat"
 $LOCATION="eastasia"
-#for DB
-#需全球唯一
-$SQL_SERVER_NAME="<your unique sql server name>"
-$ADMIN_USERNAME="<your admin username>"
-$ADMIN_PASSWORD=Read-Host "Enter the admin password"
+
+# for DB
+$SQL_SERVER_NAME="<Your Unique SQLServer Name>"                 # 需全球唯一
+$ADMIN_USERNAME="SQLAdmin"
+$ADMIN_PASSWORD=Read-Host "Enter the admin password"            # 设置一个密码，不能太简单
 $DB_NAME="dbGPT"
 
 #for APIM
-#需全球唯一
-$SVC_NAME="<your unique apim name>"
+$SVC_NAME="<Your Unique APIM Name>"                             # 需全球唯一
 $API_ID="azuregpt-api"
-$AOAI_DEPLOYMENT_ID="<your deployment id>"
-$AOAI_MODEL_ID="<your model id>"
-$AOAI_KEY=$AOAI_KEY = Read-Host "Enter the Azure OpenAI key"
-#服务创建完成会发邮件通知
+$AOAI_DEPLOYMENT_ID="<Your OpenAI Resource Name>"               # 填入AOAI服务名称
+$AOAI_MODEL_ID="<Your Deployment ID>"                           # 注意是部署的名称，可在Azure AI Studio中查看
+$AOAI_KEY = Read-Host "Enter the Azure OpenAI key"
+
+# 服务创建完成会发邮件通知
 $APIM_PUBLISHER_EMAIL="<your email>"
 $PUBLISHER="<your publisher name>"
 
-#for webapp
+#for Web App
 $VUE_APP_APIM_HOST=$SVC_NAME + ".azure-api.net"
-#等待API服务创建完成手动在Portal填写
-$VUE_APP_APIM_KEY="xxx"
-#需全球唯一, 可改为自己容易记的名字。bot访问的地址为 https://<your app name>.azurewebsites.net
-$APP_NAME="chat$(Get-Date -Format 'MMddHHmmss')"
-#这个镜像是我自己的，可以不改。如果你修后后有自己的镜像，可以改为自己的镜像地址
-$DOCKER_IMAGE="radezheng/tsgpt:basic"
+$VUE_APP_APIM_KEY="xxx"                                       # 等待API服务创建完成手动在Portal填写
+$APP_NAME="MyChatBot$(Get-Date -Format 'MMddHHmmss')"         # 需全球唯一
+$DOCKER_IMAGE="radezheng/tsgpt:basic"                         # 可不改/改为自己的镜像地址
 
 
 
