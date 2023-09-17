@@ -107,7 +107,7 @@ az account set --subscription "Subscription Name"
  ![apim_key3](./images/apim_key3.png)
 
 ### 部署多个Azure OpenAI的Endpoint/key
-- 在Azure APIM 创建多个backend：**URL格式必须一样。** 并设定api-key的header, key设定为OpenAI key.
+- 在Azure APIM 创建多个backend：**URL格式必须一样。** 并设定api-key的header, key value 设定为OpenAI key.
 ```bash
 # 替换为相应backend的值 
 https://<your OpenAI resource name>.openai.azure.com/openai/deployments/<your deployment id>  
