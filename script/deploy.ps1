@@ -92,4 +92,4 @@ Write-Host "Waiting for apim job to finish...run this command to check the log:"
  " Get-Job | Sort-Object -Property PSBeginTime -Descending | Select-Object -First 1 | Receive-Job"
 Get-Job | Sort-Object -Property PSBeginTime -Descending | Select-Object -First 1 | Receive-Job
 
-Write-Host "需要手动 更新 apim policy(./apim/policy.xml), 并获取 apim key 更新到 web app 的环境变量中"
+# Write-Host "需要手动 更新 apim policy(./apim/policy.xml), 并获取 apim key 更新到 web app 的环境变量中"
