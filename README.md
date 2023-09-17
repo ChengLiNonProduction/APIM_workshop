@@ -1,4 +1,4 @@
-# 利用 APIM 管理多个 Azure OpenAI 资源的endpoint/key
+# 这是一个 Azure OpenAI 的客户端
 
 当您拿到Azure OpenAI的订阅时，可以使用这个项目来部署第一个应用，分享给同事或朋友一起探索。<br/>
 
@@ -15,9 +15,8 @@
 
 ## 部署步骤
 ### 创建Azure资源
-- 下载安装Power Shell 7，使用 `$PSVersionTable.PSVersion` 检查版本
 - 下载安装sqlcmd, 用于初始化数据库。**安装完请重新打开PowerShell命令窗口。**
-> 如果安装sqlcmd出现问题，检查是否已安装Microsoft ODBC Driver 17 for SQL Server
+> 如果安装sqlcmd出现问题，检查是否已安装 Microsoft ODBC Driver 17 for SQL Server
 > 
 > https://learn.microsoft.com/zh-cn/sql/tools/sqlcmd/sqlcmd-utility?view=sql-server-ver16
 - 在Azure OpenAI中创建多个部署（这里以两个为例），获取相应的部署ID，模型ID和Key
@@ -25,7 +24,7 @@
 - 打开[./script/deploy.ps1](./script/deploy.ps1), 按提示修改如下变量:
 
 ```bash
-$RESOURCE_GROUP_NAME="TestGroupWebApp"
+$RESOURCE_GROUP_NAME="rgOpenAIChat"
 $LOCATION="eastasia"
 
 # for DB
@@ -34,18 +33,18 @@ $ADMIN_USERNAME="SQLAdmin"
 $ADMIN_PASSWORD=Read-Host "Enter the admin password"            # 设置一个密码，不能太简单
 $DB_NAME="dbGPT"
 
-#for APIM
+# for APIM
 $SVC_NAME="<Your Unique APIM Name>"                             # 需全球唯一
 $API_ID="azuregpt-api"
-$AOAI_DEPLOYMENT_ID="<your OpenAI resource name>"               # 填入AOAI服务名称
-$AOAI_MODEL_ID="<your deployment id>"                           # 可在Azure AI Studio中查看
+$AOAI_DEPLOYMENT_ID="<Your OpenAI Resource Name>"               # 填入AOAI服务名称
+$AOAI_MODEL_ID="<Your Deployment ID>"                           # 注意是部署的名称，可在Azure AI Studio中查看
 $AOAI_KEY = Read-Host "Enter the Azure OpenAI key"
 
 # 服务创建完成会发邮件通知
 $APIM_PUBLISHER_EMAIL="<your email>"
 $PUBLISHER="<your publisher name>"
 
-#for Web App
+# for Web App
 $VUE_APP_APIM_HOST=$SVC_NAME + ".azure-api.net"
 $VUE_APP_APIM_KEY="xxx"                                       # 等待API服务创建完成手动在Portal填写
 $APP_NAME="MyChatBot$(Get-Date -Format 'MMddHHmmss')"         # 需全球唯一
@@ -94,6 +93,19 @@ az account show
 az account set --subscription "Subscription Name"
 ```
 
+### 配置Azure资源
+1. 打开.\apim\policy.xml, 复制全部内容，粘贴到 Azure portal 里的 APIM policy。
+ ![policy1](./images/apipolicy1.png)
+ ![policy2](./images/apim_policy_2.png)
+
+2. 获取APIM key, 更新到 web app 的环境变量.
+ 打开APIM的订阅，显示Unlimited订阅的key:
+ ![apim_key1](./images/apim_key1.png)
+ 复制key:
+ ![apim_key2](./images/apim_key2.png)
+ 打开Web App, 在配置里更新 VUE_APP_APIM_KEY , 点击保存。
+ ![apim_key3](./images/apim_key3.png)
+
 ### 部署多个Azure OpenAI的Endpoint/key
 - 在Azure APIM 创建多个backend：**URL格式必须一样。** 并设定api-key的header, key设定为OpenAI key.
 ```bash
@@ -106,25 +118,8 @@ https://<your OpenAI resource name>.openai.azure.com/openai/deployments/<your de
 - 将内容全部复制替换 为 ./apim/loadbanlance.xml
 ![lb_pol3](./images/lb_policy_2.png)
 如果有多个backend, 修改 "2" 为相应的数量，并按条件增加路由项。
-## [可选] API的监控与审计
-![monitor](./images/apim_monitor.png)
 
-## 如果本地开发调试
-- 按前面部署好Azure服务准备
-- 复制 env.example到 .env, 并设定相关变量值
-- 然后运行
-```bash
-npm install
-
-
-#启动 express API server
-npm run start:server
-
-#另一窗口，启动前端
-npm run dev
-```
-按提示访问前端即可
-
---- 
+### 完成
+重启 Web App, 访问 https://<app_name>.azurewebsites.net 开始聊天。
 
 
