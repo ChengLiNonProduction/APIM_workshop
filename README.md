@@ -19,8 +19,7 @@
 > 如果安装sqlcmd出现问题，检查是否已安装 Microsoft ODBC Driver 17 for SQL Server
 > 
 > https://learn.microsoft.com/zh-cn/sql/tools/sqlcmd/sqlcmd-utility?view=sql-server-ver16
-- 在Azure OpenAI中创建多个部署（这里以两个为例），获取相应的部署ID，模型ID和Key
-> ![deployments](./images/mutiple%20deployments.png)  
+- 创建多个Azure OpenAI资源（这里以两个为例），获取相应的部署ID，和Key
 - 打开[./script/deploy.ps1](./script/deploy.ps1), 按提示修改如下变量:
 
 ```bash
