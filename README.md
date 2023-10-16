@@ -1,4 +1,4 @@
-# 这是一个 Azure OpenAI 的客户端
+# 基于 Azure OpenAI 的网页客户端
 
 当您拿到Azure OpenAI的订阅时，可以使用这个项目来部署第一个应用，分享给同事或朋友一起探索。<br/>
 
